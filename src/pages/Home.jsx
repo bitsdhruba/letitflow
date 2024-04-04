@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Blog from "../components/Blog";
-import { getBlogs } from "../api/api";
-import axios from "axios";
 import Loader from "../components/Loader/Loader";
+import { AppContext } from "../context/AppContext";
+import Page from "../components/Page";
 
 const Home = () => {
-  const [blogs, setBlogs] = useState();
-  const [load, setLoad] = useState(false);
-
-  const fetchBlogs = async () => {
-    setLoad(true);
-
-    try {
-      const { data } = await axios.get(getBlogs());
-      setBlogs(data.posts);
-      setLoad(false);
-    } catch (error) {
-      console.log("something went wrong");
-    }
-  };
+  const { fetchBlogs, load, blogs } = useContext(AppContext);
 
   useEffect(() => {
     fetchBlogs();
@@ -26,7 +13,7 @@ const Home = () => {
 
   return (
     <div className="max-w-[1200px] mx-auto">
-      <div className="flex flex-wrap gap-8 items-center justify-evenly my-12">
+      <div className="flex flex-wrap gap-8 items-center justify-evenly my-12 p-2">
         {load ? (
           <Loader />
         ) : (
@@ -35,6 +22,7 @@ const Home = () => {
           })
         )}
       </div>
+      <Page />
     </div>
   );
 };

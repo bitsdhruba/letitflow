@@ -67,7 +67,7 @@ const SIngleBlog = () => {
                     return (
                       <Link to={`/post/${tag}`} key={index}>
                         <span className="text-lg hover:text-[#003049]  mx-2">
-                          #{tag}
+                          #{tag.replaceAll(" ", "-")}
                         </span>
                       </Link>
                     );
@@ -129,7 +129,7 @@ const SIngleBlog = () => {
                   Related Blogs
                 </h2>
               </div>
-              <div className="flex flex-wrap gap-12 justify-evenly">
+              <div className="flex flex-wrap gap-12 justify-evenly p-2">
                 {load ? (
                   <Loader />
                 ) : (
