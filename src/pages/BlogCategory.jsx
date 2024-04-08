@@ -4,6 +4,7 @@ import { blogcategory } from "../api/api";
 import { useLocation } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
 import Blog from "../components/Blog";
+import Page from "../components/Page";
 
 const BlogCategory = () => {
   const location = useLocation();
@@ -43,6 +44,7 @@ const BlogCategory = () => {
           })
         )}
       </div>
+      <Page />
     </div>
   );
 };
