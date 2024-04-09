@@ -10,12 +10,13 @@ export default function AppContextProvider({ children }) {
   const [totalPage, setTotalPage] = useState();
   const [load, setLoad] = useState(false);
 
-  const fetchBlogs = async () => {
+  const fetchBlogs = async (page) => {
     setLoad(true);
 
     try {
       const { data } = await axios.get(getBlogs(page));
       setBlogs(data.posts);
+      setPage(data.page);
       setTotalPage(data.totalPages);
       setLoad(false);
     } catch (error) {

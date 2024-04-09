@@ -31,7 +31,7 @@ const BlogCategory = () => {
   return (
     <div className="max-w-[1200px] mx-auto">
       <div className="mt-12">
-        <h1 className="capitalize text-center text-[#003049] text-4xl">
+        <h1 className="capitalize text-center text-[#003049] text-3xl md:text-4xl">
           Blogs on {category}
         </h1>
       </div>
