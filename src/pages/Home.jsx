@@ -6,14 +6,13 @@ import Page from "../components/Page";
 import { useSearchParams, useLocation } from "react-router-dom";
 
 const Home = () => {
-  const { fetchBlogs, load, blogs } = useContext(AppContext);
+  const { fetchBlogs, load, blogs, page, totalPage } = useContext(AppContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
   useEffect(() => {
     const page = searchParams.get("page") ?? 1;
     fetchBlogs(Number(page));
-    console.log(Number(page));
   }, [location.search]);
 
   return (
@@ -27,7 +26,7 @@ const Home = () => {
           })
         )}
       </div>
-      <Page />
+      <Page page={page} totalPage={totalPage} />
     </div>
   );
 };

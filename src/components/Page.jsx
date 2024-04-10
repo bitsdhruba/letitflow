@@ -2,22 +2,9 @@ import { useContext } from "react";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { AppContext } from "../context/AppContext";
-import { useNavigate } from "react-router-dom";
 
-const Page = () => {
-  const { page, totalPage, setPage } = useContext(AppContext);
-
-  const navigate = useNavigate();
-
-  const pageNumberHandler = (num) => {
-    navigate({ search: `?page=${num}` });
-    setPage(num);
-  };
-
-  const pageNavigator = (page) => {
-    navigate({ search: `?page=${page}` });
-    setPage(page);
-  };
+const Page = ({ page, totalPage }) => {
+  const { pageNumberHandler, pageNavigator } = useContext(AppContext);
 
   return (
     <div className="p-2 max-w-[1200px] mx-auto flex justify-evenly mb-12">
@@ -34,7 +21,11 @@ const Page = () => {
         return (
           <button
             key={i}
-            className="border-2 border-red-600 rounded-full p-1 md:p-2 size-10 md:size-12 text-center active:bg-[#fcc049]"
+            className={
+              page === i + 1
+                ? "border-2 border-red-600 rounded-full p-1 md:p-2 size-10 md:size-12 text-center bg-[#002f4952]"
+                : "border-2 border-red-600 rounded-full p-1 md:p-2 size-10 md:size-12 text-center hover:bg-[#d6282869]"
+            }
             onClick={() => pageNumberHandler(i + 1)}
           >
             {i + 1}

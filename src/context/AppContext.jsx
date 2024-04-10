@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useState } from "react";
 import { getBlogs } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext();
 
@@ -24,6 +25,18 @@ export default function AppContextProvider({ children }) {
     }
   };
 
+  const navigate = useNavigate();
+
+  const pageNumberHandler = (num) => {
+    navigate({ search: `?page=${num}` });
+    setPage(num);
+  };
+
+  const pageNavigator = (page) => {
+    navigate({ search: `?page=${page}` });
+    setPage(page);
+  };
+
   const value = {
     fetchBlogs,
     blogs,
@@ -31,6 +44,8 @@ export default function AppContextProvider({ children }) {
     page,
     setPage,
     totalPage,
+    pageNavigator,
+    pageNumberHandler,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
